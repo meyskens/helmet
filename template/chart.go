@@ -2,7 +2,7 @@ package template
 
 import yaml "gopkg.in/yaml.v1"
 
-// Chart describes the content of chart.yaml
+// ChartInfo describes the content of chart.yaml
 type ChartInfo struct {
 	APIVersion  string `yaml:"apiVersion"`
 	APPVersion  string `yaml:"appVersion"`
