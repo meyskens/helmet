@@ -1,0 +1,40 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: unit-empty
+  labels:
+    app: empty
+    chart: empty-0.1.0
+    release: unit
+    heritage: helmet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: empty
+      release: unit
+  template:
+    metadata:
+      labels:
+        app: empty
+        release: unit
+    spec:
+      containers:
+        - name: empty
+          image: "nginx:stable"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
+            

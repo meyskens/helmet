@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: unit-empty
+  labels:
+    app: empty
+    chart: empty-0.1.0
+    release: unit
+    heritage: helmet
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: empty
+    release: unit
