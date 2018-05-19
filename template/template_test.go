@@ -42,6 +42,7 @@ func loadOutputFromPath(p string) map[string][]byte {
 
 func TestChart_CreateManifests(t *testing.T) {
 	emptyChartInfo, emptyValues, emptyFiles := loadChartFromPath("../testfiles/empty/")
+	emptynnChartInfo, emptynnValues, emptynnFiles := loadChartFromPath("../testfiles/empty-nonotes/")
 	emptyOut := loadOutputFromPath("../testfiles/empty-output/")
 	type fields struct {
 		templateFiles map[string][]byte
@@ -73,6 +74,19 @@ func TestChart_CreateManifests(t *testing.T) {
 			want:  emptyOut,
 			want1: []byte(emptyNOTES),
 		},
+		{
+			name: "Test empty chart file without NOTES.txt",
+			fields: fields{
+				templateFiles: emptynnFiles,
+				chartInfo:     emptynnChartInfo,
+				values:        emptynnValues,
+			},
+			args: args{
+				release: NewRelease("unit", "test"),
+			},
+			want:  emptyOut,
+			want1: []byte{10},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -91,7 +105,7 @@ func TestChart_CreateManifests(t *testing.T) {
 				t.Errorf("Chart.CreateManifests() got = %v, want %v", got, tt.want)
 			}
 			if !reflect.DeepEqual(got1, tt.want1) {
-				t.Errorf("Chart.CreateManifests() got1 = %v, want %v", string(got1), string(tt.want1))
+				t.Errorf("Chart.CreateManifests() got1 = '%v', want '%v'", string(got1), string(tt.want1))
 			}
 		})
 	}
