@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"text/template"
 
+	"github.com/jinzhu/copier"
 	"github.com/pmylund/sortutil"
 )
 
@@ -105,4 +106,14 @@ func (c *Chart) templateToBytes(t *template.Template) ([]byte, error) {
 	err := t.Execute(buf, input)
 
 	return buf.Bytes(), err
+}
+
+// Clone gives a deep copy of the chart
+func (c *Chart) Clone() (*Chart, error) {
+	new := Chart{}
+	err := copier.Copy(&new, c)
+	if err != nil {
+		return nil, err
+	}
+	return &new, nil
 }
