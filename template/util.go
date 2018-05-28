@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"html/template"
+	"text/template"
 
 	"github.com/Masterminds/sprig"
 	toml "github.com/pelletier/go-toml"
@@ -57,7 +57,7 @@ func toToml(v interface{}) string {
 }
 
 func getFuncMap(t *template.Template) template.FuncMap {
-	f := sprig.FuncMap()
+	f := sprig.TxtFuncMap()
 	f["toYaml"] = toYaml
 	f["fromYaml"] = fromYaml
 	f["toToml"] = toToml

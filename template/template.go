@@ -3,7 +3,7 @@ package template
 import (
 	"bytes"
 	"fmt"
-	"html/template"
+	"text/template"
 
 	"github.com/pmylund/sortutil"
 )
@@ -70,7 +70,6 @@ func (c *Chart) CreateManifests(release Release) (map[string][]byte, []byte, err
 		}
 		manifests[file] = manifest
 	}
-
 	notes, err := c.templateToBytes(printTmpl)
 	if err != nil {
 		return nil, nil, err
@@ -80,22 +79,25 @@ func (c *Chart) CreateManifests(release Release) (map[string][]byte, []byte, err
 }
 
 func (c *Chart) generateOutput(tmpl *template.Template, content []byte) ([]byte, error) {
-	tmpl, err := tmpl.Clone()
+	t, err := tmpl.Clone()
 	if err != nil {
 		return nil, err
 	}
-	tmpl, err = tmpl.Parse(string(content))
-	return c.templateToBytes(tmpl)
+	t, err = t.Parse(string(content))
+	if err != nil {
+		return nil, err
+	}
+	return c.templateToBytes(t)
 }
 
-func (c *Chart) templateToBytes(tmpl *template.Template) ([]byte, error) {
+func (c *Chart) templateToBytes(t *template.Template) ([]byte, error) {
 	input := tempateInput{
 		Chart:   c.chartInfo,
 		Values:  c.values,
 		Release: c.release,
 	}
 	buf := new(bytes.Buffer)
-	err := tmpl.Execute(buf, input)
+	err := t.Execute(buf, input)
 
 	return buf.Bytes(), err
 }
