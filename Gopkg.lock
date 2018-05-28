@@ -50,6 +50,12 @@
   version = "v1.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/jinzhu/copier"
+  packages = ["."]
+  revision = "7e38e58719c33e0d44d585c4ab477a30f8cb82dd"
+
+[[projects]]
   name = "github.com/pelletier/go-toml"
   packages = ["."]
   revision = "acdc4509485b587f5e675510c4f2c63e90ff68a8"
@@ -103,6 +109,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f8f9a908739933142cfa95850a00b872126c76151774316c780cc2ef445cd9f0"
+  inputs-digest = "5e919ca1afde2cf14711a98c9cc7662943f707093285018292b2d22baad61889"
   solver-name = "gps-cdcl"
   solver-version = 1
