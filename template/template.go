@@ -31,6 +31,11 @@ func New(chartInfo *ChartInfo, values map[string]interface{}, files map[string][
 	}
 }
 
+// MergeValues allows to overwrite values and merge them with the existing ones
+func (c *Chart) MergeValues(newValues map[string]interface{}) {
+	mergeValues(c.values, newValues)
+}
+
 // CreateManifests generates the Kubernetes manifests and NOTES.txt output
 func (c *Chart) CreateManifests(release Release) (map[string][]byte, []byte, error) {
 	c.release = release

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"reflect"
 	"text/template"
 
 	"github.com/Masterminds/sprig"
@@ -84,4 +85,22 @@ func getFuncMap(t *template.Template) template.FuncMap {
 	}
 
 	return f
+}
+
+func mergeValues(old map[string]interface{}, new map[string]interface{}) {
+	for key := range new {
+		if _, ok := old[key]; ok {
+			if old[key] != nil {
+				oldKind := reflect.TypeOf(old[key]).Kind()
+				newKind := reflect.TypeOf(new[key]).Kind()
+
+				if oldKind == reflect.Map && newKind == reflect.Map {
+					mergeValues(old[key].(map[string]interface{}), new[key].(map[string]interface{}))
+					continue
+				}
+			}
+		}
+
+		old[key] = new[key]
+	}
 }
