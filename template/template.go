@@ -12,19 +12,19 @@ import (
 // Chart represents everything in a Helm chart
 type Chart struct {
 	templateFiles map[string][]byte
-	values        map[string]interface{}
+	values        map[interface{}]interface{}
 	chartInfo     *ChartInfo
 	release       Release
 }
 
 type tempateInput struct {
 	Chart   *ChartInfo
-	Values  map[string]interface{}
+	Values  map[interface{}]interface{}
 	Release Release
 }
 
 // New generates a new Chart object
-func New(chartInfo *ChartInfo, values map[string]interface{}, files map[string][]byte) *Chart {
+func New(chartInfo *ChartInfo, values map[interface{}]interface{}, files map[string][]byte) *Chart {
 	return &Chart{
 		templateFiles: files,
 		values:        values,
@@ -33,7 +33,7 @@ func New(chartInfo *ChartInfo, values map[string]interface{}, files map[string][
 }
 
 // MergeValues allows to overwrite values and merge them with the existing ones
-func (c *Chart) MergeValues(newValues map[string]interface{}) {
+func (c *Chart) MergeValues(newValues map[interface{}]interface{}) {
 	mergeValues(c.values, newValues)
 }
 

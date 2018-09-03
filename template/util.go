@@ -87,7 +87,7 @@ func getFuncMap(t *template.Template) template.FuncMap {
 	return f
 }
 
-func mergeValues(old map[string]interface{}, new map[string]interface{}) {
+func mergeValues(old map[interface{}]interface{}, new map[interface{}]interface{}) {
 	for key := range new {
 		if _, ok := old[key]; ok {
 			if old[key] != nil {
@@ -95,7 +95,7 @@ func mergeValues(old map[string]interface{}, new map[string]interface{}) {
 				newKind := reflect.TypeOf(new[key]).Kind()
 
 				if oldKind == reflect.Map && newKind == reflect.Map {
-					mergeValues(old[key].(map[string]interface{}), new[key].(map[string]interface{}))
+					mergeValues(old[key].(map[interface{}]interface{}), new[key].(map[interface{}]interface{}))
 					continue
 				}
 			}
