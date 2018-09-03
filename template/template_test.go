@@ -13,7 +13,7 @@ const emptyNOTES = `1. Get the application URL by running these commands:
   kubectl port-forward $POD_NAME 8080:80
 `
 
-func loadChartFromPath(p string) (*ChartInfo, map[string]interface{}, map[string][]byte) {
+func loadChartFromPath(p string) (*ChartInfo, map[interface{}]interface{}, map[string][]byte) {
 	chartFile, _ := ioutil.ReadFile(path.Join(p, "Chart.yaml"))
 	valuesFile, _ := ioutil.ReadFile(path.Join(p, "values.yaml"))
 	chart, _ := ParseChartFile(chartFile)
@@ -46,7 +46,7 @@ func TestChart_CreateManifests(t *testing.T) {
 	emptyOut := loadOutputFromPath("../testfiles/empty-output/")
 	type fields struct {
 		templateFiles map[string][]byte
-		values        map[string]interface{}
+		values        map[interface{}]interface{}
 		chartInfo     *ChartInfo
 		release       Release
 	}

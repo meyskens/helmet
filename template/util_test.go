@@ -8,25 +8,25 @@ import (
 
 func Test_mergeValues(t *testing.T) {
 	type args struct {
-		old map[string]interface{}
-		new map[string]interface{}
+		old map[interface{}]interface{}
+		new map[interface{}]interface{}
 	}
 	tests := []struct {
 		name string
 		args args
-		want map[string]interface{}
+		want map[interface{}]interface{}
 	}{
 		{
 			name: "test 2 new keys",
 			args: args{
-				old: map[string]interface{}{
+				old: map[interface{}]interface{}{
 					"test1": "ok",
 				},
-				new: map[string]interface{}{
+				new: map[interface{}]interface{}{
 					"test2": "ok",
 				},
 			},
-			want: map[string]interface{}{
+			want: map[interface{}]interface{}{
 				"test1": "ok",
 				"test2": "ok",
 			},
@@ -34,33 +34,33 @@ func Test_mergeValues(t *testing.T) {
 		{
 			name: "test override keys",
 			args: args{
-				old: map[string]interface{}{
+				old: map[interface{}]interface{}{
 					"test1": "ok",
 				},
-				new: map[string]interface{}{
+				new: map[interface{}]interface{}{
 					"test1": "evenmoreok",
 				},
 			},
-			want: map[string]interface{}{
+			want: map[interface{}]interface{}{
 				"test1": "evenmoreok",
 			},
 		},
 		{
 			name: "test nested keys",
 			args: args{
-				old: map[string]interface{}{
-					"test1": map[string]interface{}{
+				old: map[interface{}]interface{}{
+					"test1": map[interface{}]interface{}{
 						"test2": "ok",
 					},
 				},
-				new: map[string]interface{}{
-					"test1": map[string]interface{}{
+				new: map[interface{}]interface{}{
+					"test1": map[interface{}]interface{}{
 						"test2": "whoreadsthis",
 					},
 				},
 			},
-			want: map[string]interface{}{
-				"test1": map[string]interface{}{
+			want: map[interface{}]interface{}{
+				"test1": map[interface{}]interface{}{
 					"test2": "whoreadsthis",
 				},
 			},

@@ -61,7 +61,7 @@ func TestParseValuesFile(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		want    map[string]interface{}
+		want    map[interface{}]interface{}
 		wantErr bool
 	}{
 		{
@@ -69,7 +69,7 @@ func TestParseValuesFile(t *testing.T) {
 			args: args{
 				in: []byte(valuesFile),
 			},
-			want: map[string]interface{}{
+			want: map[interface{}]interface{}{
 				"replicaCount": 1,
 				"image": map[interface{}]interface{}{
 					"repository": "nginx",
