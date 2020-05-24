@@ -88,6 +88,9 @@ func getFuncMap(t *template.Template) template.FuncMap {
 }
 
 func mergeValues(old map[interface{}]interface{}, new map[interface{}]interface{}) {
+	if old == nil {
+		old = map[interface{}]interface{}{}
+	}
 	for key := range new {
 		if _, ok := old[key]; ok {
 			if old[key] != nil {
