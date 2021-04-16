@@ -2,6 +2,14 @@
 
 
 [[projects]]
+  digest = "1:ac863b61c1d78cc489b41237a644ef8b4032309ae993c33f9b068bd679b26999"
+  name = "github.com/Masterminds/goutils"
+  packages = ["."]
+  pruneopts = ""
+  revision = "f1923532a168b8203bfe956d8cd3b17ebece5982"
+  version = "v1.1.1"
+
+[[projects]]
   digest = "1:b856d8248663c39265a764561c1a1a149783f6cc815feb54a1f3a591b91f6eca"
   name = "github.com/Masterminds/semver"
   packages = ["."]
@@ -10,12 +18,12 @@
   version = "v1.4.2"
 
 [[projects]]
-  digest = "1:d10482a602e3facc4fb1115a862153759339b825503f8420fcfc9738fd547730"
+  digest = "1:35addf87b8ba00f8785686d0f1d2607f15e3d244912438af52460cce2f9b35f2"
   name = "github.com/Masterminds/sprig"
   packages = ["."]
   pruneopts = ""
-  revision = "6b2a58267f6a8b1dc8e2eb5519b984008fa85e8c"
-  version = "v2.15.0"
+  revision = "e4c0945838d570720d876a6ad9b4568ed32317b4"
+  version = "v2.22.0"
 
 [[projects]]
   digest = "1:24cff84fefa06791f78f9bc6e05c2a3a90710c81ae6b76225280daf33b267d36"
@@ -72,6 +80,22 @@
   packages = ["."]
   pruneopts = ""
   revision = "7e38e58719c33e0d44d585c4ab477a30f8cb82dd"
+
+[[projects]]
+  digest = "1:2c2ad07f9f362107cf68a891527d904f33aadc520dc74f4d33c4ed3129e0e773"
+  name = "github.com/mitchellh/copystructure"
+  packages = ["."]
+  pruneopts = ""
+  revision = "669acedc395e9787079b9144952d8b1469cadc7d"
+  version = "v1.1.2"
+
+[[projects]]
+  digest = "1:d732b4a6d4981b65382155a192c0a773334035ad680566813f85dd5b99a12e26"
+  name = "github.com/mitchellh/reflectwalk"
+  packages = ["."]
+  pruneopts = ""
+  revision = "3e2c75dfad4fbf904b58782a80fd595c760ad185"
+  version = "v1.0.1"
 
 [[projects]]
   digest = "1:d60cfeee185019d4fcd35e8c89c83aff576e4723b6100300bf67b05be961388f"
