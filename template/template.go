@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"text/template"
 
-	"github.com/jinzhu/copier"
 	"github.com/pmylund/sortutil"
 )
 
@@ -53,6 +52,7 @@ func (c *Chart) CreateManifests(release Release) (map[string][]byte, []byte, err
 	for k := range c.templateFiles {
 		fileNames = append(fileNames, k)
 	}
+
 	sortutil.CiAsc(fileNames)
 	for _, name := range fileNames {
 		if name == "NOTES.txt" {
@@ -108,10 +108,34 @@ func (c *Chart) templateToBytes(t *template.Template) ([]byte, error) {
 
 // Clone gives a deep copy of the chart
 func (c *Chart) Clone() (*Chart, error) {
-	new := Chart{}
-	err := copier.Copy(&new, c)
-	if err != nil {
-		return nil, err
+	info := *c.chartInfo
+	return &Chart{
+		templateFiles: copyMapB(c.templateFiles),
+		values:        copyMapI(c.values),
+		chartInfo:     &info,
+		release:       c.release,
+	}, nil
+}
+
+func copyMapB(m map[string][]byte) map[string][]byte {
+	cp := make(map[string][]byte)
+	for k, v := range m {
+		cp[k] = []byte(string(v))
 	}
-	return &new, nil
+
+	return cp
+}
+
+func copyMapI(m map[interface{}]interface{}) map[interface{}]interface{} {
+	cp := make(map[interface{}]interface{})
+	for k, v := range m {
+		vm, ok := v.(map[interface{}]interface{})
+		if ok {
+			cp[k] = copyMapI(vm)
+		} else {
+			cp[k] = v
+		}
+	}
+
+	return cp
 }

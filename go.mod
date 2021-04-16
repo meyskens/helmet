@@ -12,7 +12,6 @@ require (
 	github.com/huandu/xstrings v1.0.0 // indirect
 	github.com/imdario/mergo v0.3.4 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
-	github.com/jinzhu/copier v0.2.9
 	github.com/pelletier/go-toml v1.1.0
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/pmylund/sortutil v0.0.0-20120526081524-abeda66eb583
