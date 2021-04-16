@@ -41,8 +41,9 @@ func (c *Chart) MergeValues(newValues map[interface{}]interface{}) {
 func (c *Chart) CreateManifests(release Release) (map[string][]byte, []byte, error) {
 	c.release = release
 
-	printTmpl := template.New("Manifests")
+	printTmpl := template.New("Print")
 	printTmpl = printTmpl.Funcs(getFuncMap(printTmpl))
+
 	tmpl := template.New("Manifests")
 	tmpl = tmpl.Funcs(getFuncMap(tmpl))
 	var err error
@@ -76,10 +77,7 @@ func (c *Chart) CreateManifests(release Release) (map[string][]byte, []byte, err
 		}
 		manifests[file] = manifest
 	}
-	notes, err := c.templateToBytes(printTmpl)
-	if err != nil {
-		return nil, nil, err
-	}
+	notes, _ := c.templateToBytes(printTmpl) // can be empty, allowed to fail
 
 	return manifests, notes, nil
 }
